@@ -1,0 +1,8 @@
+alias ed='emacs --daemon'
+alias em='emacs'
+alias en='emacs -nw'
+# Temporary for now.. figure out a way to have different buffers for different frames
+alias e='emacs -nw'
+alias ec='emacsclient -nw'
+alias et='emacsclient -t'
+alias E='SUDO_EDITOR=emacsclient sudo -e'

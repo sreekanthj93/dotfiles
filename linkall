@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+# Colors
+yellow="\e[33;40m"
+red="\e[31;40m"
+green="\e[32;40m"
+nocolor="\e[39;49m"
+
+pushd `dirname $0` > /dev/null
+SCRIPTPATH=`pwd`
+DOTFILESPATH="$SCRIPTPATH/configs"
+popd > /dev/null
+
+pushd ~ > /dev/null
+
+echo "Creating symlinks for dotfiles in $DOTFILESPATH"
+echo "Force symlinks if present?[y/n]"
+read force
+if [ "$force" == "y" ]; then
+	rm=true
+else
+	rm=false
+fi	
+
+for dotfile in `find $DOTFILESPATH -mindepth 1 -maxdepth 1`; do
+	linkfile=".${dotfile##*/}"
+	echo -n " $dotfile -> $linkfile... "
+
+	if [ -e "$linkfile" ]; then
+		echo -en "${yellow}Exists..${nocolor} "
+		if [ "$rm" == true ]; then
+			echo -n "Deleting.. "
+			rm -rf "$linkfile"
+		fi
+	fi
+	echo -n "Creating.. "
+	ln -s "$dotfile" "$linkfile" > /dev/null 2>&1
+
+	if [ $? -eq 0 ]; then
+      echo -e "${green}OK${nocolor}"
+    else
+      echo -e "${red}Failed${nocolor}"
+    fi
+done
+
+popd > /dev/null

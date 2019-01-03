@@ -1,0 +1,2 @@
+alias fname='find . -name'
+alias finame='find . -iname'

@@ -1,0 +1,21 @@
+# load all aliases from .alias.d folder
+for aliasfile in ~/.alias.d/*; do
+    source $aliasfile
+done
+
+# load custom alias here if present
+test -s ~/.alias && source ~/.alias || true
+
+# ~/local/bin usages
+if [ -d "$HOME/local/bin" ] ; then
+        export PATH=~/local/bin:$PATH
+fi
+# ~/local/usr/bin usages
+if [ -d "$HOME/local/usr/bin" ] ; then
+        export PATH=~/local/usr/bin:$PATH
+fi
+
+[[ "$TMUX" == "" ]] && TERM=xterm-256color
+
+unsetopt share_history
+setopt histignoredups

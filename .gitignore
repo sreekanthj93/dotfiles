@@ -1,0 +1,9 @@
+# Emacs ones
+\#*#
+configs/emacs.d/*
+*.elc
+# But don't ignore these specific locations.
+!configs/emacs.d/lisp
+!configs/emacs.d/site-lisp
+!configs/emacs.d/init.el
+!configs/emacs.d/.dir-locals.el
