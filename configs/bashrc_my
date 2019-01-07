@@ -14,3 +14,7 @@ fi
 if [ -d "$HOME/local/usr/bin" ] ; then
         export PATH=~/local/usr/bin:$PATH
 fi
+
+# ambigious completions for bash
+bind 'set show-all-if-ambiguous on'
+bind 'TAB:menu-complete'
