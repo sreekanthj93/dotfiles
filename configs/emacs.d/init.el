@@ -17,8 +17,7 @@
 
 (require 'init-benchmarking) ;; Measure startup time
 
-;; Also add all directories and files within inits
-;; I use this for packages I'm actively working on, mostly.
+;; All emacs lisp files are under emacs.d/lisp
 (let ((files (directory-files-and-attributes "~/.emacs.d/lisp" t)))
   (dolist (file files)
     (let ((filename (car file))
@@ -48,20 +47,58 @@
 (setq custom-safe-themes t)
 (column-number-mode t)
 
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; White Space configurations
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 (require 'whitespace)
-(setq whitespace-line-column 80)
+(setq whitespace-line-column 100)
 (setq whitespace-style '(face empty tabs lines-tail trailin))
 (global-whitespace-mode t)
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 ;; Variables configured via the interactive 'customize' interface
 (when (file-exists-p custom-file)
   (load custom-file))
 
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; Save last opened file line ;)
+(save-place-mode 1)
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+;; Flycheck
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+
+;; gnu global
+(use-package ggtags :ensure t)
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; EVIL MODE Setup work in progress
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; Undo tree dependency for evil
+(use-package undo-tree :ensure t)
+(global-undo-tree-mode)
+
+;; goto-chg dependency for evil
+(require 'goto-chg)
+
+(use-package evil :ensure t)
+(setq evil-toggle-key "")
+(require 'evil)
+(setq evil-default-state 'emacs)
+(evil-mode 0)
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; THEMES
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 (use-package zenburn-theme :ensure t :defer t)
 (use-package spacemacs-common :ensure spacemacs-theme)
 (load-theme 'spacemacs-dark t)
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 (provide 'init)
 ;;; init.el ends here
