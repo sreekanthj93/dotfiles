@@ -82,6 +82,7 @@
 (global-undo-tree-mode)
 
 ;; goto-chg dependency for evil
+(use-package goto-chg :ensure t)
 (require 'goto-chg)
 
 (use-package evil :ensure t)
