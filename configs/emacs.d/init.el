@@ -50,9 +50,18 @@
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; White Space configurations
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+(setq-default indent-tabs-mode t)
+(setq-default tab-width 4)
+(setq c-backspace-function 'backward-delete-char)
+(defvaralias 'c-basic-offset 'tab-width)
+
 (require 'whitespace)
 (setq whitespace-line-column 100)
-(setq whitespace-style '(face empty tabs lines-tail trailin))
+(setq whitespace-style '(face empty tabs spaces lines-tail trailing))
+(setq whitespace-display-mappings
+      '((space-mark 32 [183] [46])
+        (tab-mark 9 [8594 9] [92 9])
+        ))
 (global-whitespace-mode t)
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -99,6 +108,18 @@
 (use-package zenburn-theme :ensure t :defer t)
 (use-package spacemacs-common :ensure spacemacs-theme)
 (load-theme 'spacemacs-dark t)
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; Clang Formatting setup
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+(use-package clang-format :ensure t :defer t)
+(require 'clang-format)
+(global-set-key (kbd "C-c r") 'clang-format-region)
+(global-set-key (kbd "C-c b") 'clang-format-buffer)
+;; Set style option for clang-format
+;;(setq clang-format-style-option "llvm")
+(setq clang-format-style-option "'{BasedOnStyle: WebKit, AlignConsecutiveAssignments: true, Standard: LS_Auto, TabWidth: 4, UseTab: UT_ForIndentation}'")
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 (provide 'init)
