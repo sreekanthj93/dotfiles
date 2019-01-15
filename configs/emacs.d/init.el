@@ -24,7 +24,8 @@
 (setq package-enable-at-startup nil)
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
-(require 'init-benchmarking) ;; Measure startup time
+;; Measure startup time
+(require 'init-benchmarking)
 
 ;; All emacs lisp files are under emacs.d/lisp
 (let ((files (directory-files-and-attributes "~/.emacs.d/lisp" t)))
@@ -91,6 +92,10 @@
 
 ;; gnu global
 (use-package ggtags :ensure t)
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+              (ggtags-mode 1))))
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; EVIL MODE Setup work in progress
@@ -194,6 +199,18 @@
 							:background "black")))
 	)
 )
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; Projectile for projects
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+(use-package projectile
+  :ensure t
+  :config
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (projectile-mode +1))
+(setq projectile-svn-command "find . -type f -not -iwholename '*.svn/*' -print0")
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 (provide 'init)
