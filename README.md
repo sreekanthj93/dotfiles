@@ -17,4 +17,4 @@ Finally to get aliases add below lines in .bashrc or .zshrc
 2. For Zsh
   ```console
     source ~/.zshrc_my
-  ```	
+  ```

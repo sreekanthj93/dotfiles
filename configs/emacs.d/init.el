@@ -1,4 +1,5 @@
-;;; init.el
+;;; init.el --- Load the full configuration -*- lexical-binding: t -*-
+;;; Commentary: my own init.el
 
 ;; Produce backtraces when errors occur
 (setq debug-on-error t)
@@ -10,6 +11,9 @@
 (prefer-coding-system 'utf-8)
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
+
+(when (version<= "26.0.50" emacs-version )
+  (global-display-line-numbers-mode))
 
 (require 'package)
 (setq package-enable-at-startup nil)
@@ -118,8 +122,24 @@
 (global-set-key (kbd "C-c r") 'clang-format-region)
 (global-set-key (kbd "C-c b") 'clang-format-buffer)
 ;; Set style option for clang-format
-;;(setq clang-format-style-option "llvm")
+;;(setq clang-format-style-option "WebKit")
 (setq clang-format-style-option "'{BasedOnStyle: WebKit, AlignConsecutiveAssignments: true, Standard: LS_Auto, TabWidth: 4, UseTab: UT_ForIndentation}'")
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; Perspective package to differentiate buffers in frames
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+(use-package perspective :ensure t :defer t)
+(require 'perspective)
+(persp-mode)
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; Company auto completion
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+(use-package company :ensure t :defer t)
+(require 'company)
+(add-hook 'after-init-hook 'global-company-mode)
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 (provide 'init)
