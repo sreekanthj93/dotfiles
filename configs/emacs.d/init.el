@@ -140,6 +140,55 @@
 (use-package company :ensure t :defer t)
 (require 'company)
 (add-hook 'after-init-hook 'global-company-mode)
+(global-set-key (kbd "C-TAB") 'company-complete-common)
+;; Facing
+(deftheme spacemacs-dark-overrides)
+(let (
+		(class '((class color) (min-colors 257)))
+		(terminal-class '((class color) (min-colors 89)))
+	)
+	(custom-theme-set-faces 'spacemacs-dark-overrides
+		;; Company tweaks.
+		`(company-tooltip-common
+			((t :foreground "magenta"
+				:background "black"
+				:underline t))
+		)
+		`(company-template-field
+			((t :inherit company-tooltip
+				:foreground "magenta")))
+		`(company-tooltip-selection
+			((t :background "gray40"
+				:foreground "magenta")))
+		`(company-tooltip-common-selection
+			((t :foreground "orange"
+				:background "gray40"
+				:underline t)))
+		`(company-scrollbar-fg
+			((t :background "magenta")))
+		`(company-tooltip-annotation
+			((t :inherit company-tooltip
+				:foreground "magenta")))
+		;; Popup menu tweaks.
+		`(popup-menu-face
+			((t :foreground "magenta"
+				:background "black")))
+		;; Popup menu tweaks.
+		`(popup-menu-selection-face
+			((t :background "magenta"
+				:foreground "black")))
+		;; Linum and mode-line improvements
+		`(linum
+			((,class :foreground "magenta"
+					:background "black")))
+		;; Custom region colouring.
+		`(region
+			((,class :foreground "magenta"
+					:background "black")
+			(,terminal-class :foreground "magenta"
+							:background "black")))
+	)
+)
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 (provide 'init)
