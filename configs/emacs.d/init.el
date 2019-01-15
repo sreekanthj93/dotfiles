@@ -12,8 +12,13 @@
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
 
+;; Show line numbers by default
 (when (version<= "26.0.50" emacs-version )
   (global-display-line-numbers-mode))
+
+;; Show matching parentheses
+(show-paren-mode 1)
+(setq show-paren-delay 0)
 
 (require 'package)
 (setq package-enable-at-startup nil)
