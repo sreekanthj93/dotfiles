@@ -8,11 +8,15 @@ test -s ~/.alias && source ~/.alias || true
 
 # ~/local/bin usages
 if [ -d "$HOME/local/bin" ] ; then
-        export PATH=~/local/bin:$PATH
+        export PATH=$HOME/local/bin:$PATH
 fi
 # ~/local/usr/bin usages
 if [ -d "$HOME/local/usr/bin" ] ; then
-        export PATH=~/local/usr/bin:$PATH
+        export PATH=$HOME/local/usr/bin:$PATH
+fi
+# ~/.local/bin usages
+if [ -d "$HOME/.local/bin" ] ; then
+        export PATH=$HOME/.local/bin:$PATH
 fi
 
 [[ "$TMUX" == "" ]] && TERM=xterm-256color
