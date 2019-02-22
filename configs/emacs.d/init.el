@@ -57,13 +57,18 @@
 (setq custom-safe-themes t)
 (column-number-mode t)
 
+(setq make-backup-files nil) ; stop creating backup~ files
+(setq auto-save-default nil) ; stop creating #autosave# files
+
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; White Space configurations
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-(setq-default indent-tabs-mode t)
+;; (setq-default indent-tabs-mode t)
 (setq-default tab-width 4)
 (setq c-backspace-function 'backward-delete-char)
-(defvaralias 'c-basic-offset 'tab-width)
+(setq-default c-basic-offset 4
+              c-default-style "allman"
+              tab-width 4)
 
 (require 'whitespace)
 (setq whitespace-line-column 100)
