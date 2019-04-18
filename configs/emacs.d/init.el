@@ -16,6 +16,14 @@
 (when (version<= "26.0.50" emacs-version )
   (global-display-line-numbers-mode))
 
+;; Ignore error function
+(defun ignore-error-wrapper (fn)
+  (let ((fn fn))
+    (lambda ()
+      (interactive)
+      (ignore-errors
+        (funcall fn)))))
+
 ;; Show matching parentheses
 (show-paren-mode 1)
 (setq show-paren-delay 0)
@@ -59,6 +67,11 @@
 
 (setq make-backup-files nil) ; stop creating backup~ files
 (setq auto-save-default nil) ; stop creating #autosave# files
+
+(global-set-key (kbd "C-c <left>")  (ignore-error-wrapper 'windmove-left))
+(global-set-key (kbd "C-c <right>") (ignore-error-wrapper 'windmove-right))
+(global-set-key (kbd "C-c <up>")    (ignore-error-wrapper 'windmove-up))
+(global-set-key (kbd "C-c <down>")  (ignore-error-wrapper 'windmove-down))
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; White Space configurations
