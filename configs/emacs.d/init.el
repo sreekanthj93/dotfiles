@@ -2,7 +2,7 @@
 ;;; Commentary: my own init.el
 
 ;; Produce backtraces when errors occur
-(setq debug-on-error t)
+;;(setq debug-on-error t)
 
 ;; Leave this here, or package.el will just add it again.
 (package-initialize)
