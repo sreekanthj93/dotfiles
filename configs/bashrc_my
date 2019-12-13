@@ -22,3 +22,80 @@ fi
 # ambigious completions for bash
 bind 'set show-all-if-ambiguous on'
 bind 'TAB:menu-complete'
+
+call_count=1
+bash_prompt() {
+#    local ps1="\[\e[38;5;135m\]\u\[\e[0m\] at \[\e[38;5;166m\]\h\[\e[0m\] in \[\e[38;5;82m\]\w\[\e[0m\]"
+    local vcs
+    ((call_count++))
+
+    _reset() {
+        vcs=""
+    }
+
+    _git() {
+        _reset
+
+        local Branch
+        $(git rev-parse --is-inside-git-dir 2>/dev/null ) \
+            && return 1
+        $(git rev-parse --is-inside-work-tree 2>/dev/null ) \
+            || return 1
+        git status &>/dev/null
+        Branch=$(git symbolic-ref --quiet HEAD 2>/dev/null ) \
+            || Branch=$(git rev-parse --short HEAD 2>/dev/null ) \
+            || Branch='unknown or detached'
+        Branch=${Branch##*/}
+        git diff --quiet --ignore-submodules --cached \
+            || state=${state}+
+        git diff-files --quiet --ignore-submodules -- \
+            || state=${state}!
+        $(git rev-parse --verify refs/stash &>/dev/null ) \
+            && state=${state}^
+        [ -n "$(git ls-files --others --exclude-standard )" ] \
+            && state=${state}?
+
+        vcs="(GIT:${Branch}${state})"
+    }
+
+    _svn() {
+        _reset
+
+        local URL
+        local Root
+        local Branch
+        local Rev
+        svn info &>/dev/null || return 1
+
+        local line
+        while IFS= read -r line ; do
+            case `echo $line | cut -d':' -f1` in
+                "URL")
+                    URL="$(echo $line | awk -F': ' '$1 == "URL" {print $2}')"
+                ;;
+                "Repository Root")
+                    Root="$(echo $line | awk -F': ' '$1 == "Repository Root" {print $2}')"
+                ;;
+                "Revision")
+                    Rev="$(echo $line | awk -F': ' '$1 == "Revision" {print $2}')"
+                ;;
+                *)
+                ;;
+            esac
+            echo > /dev/null
+        done < <(svn info 2>/dev/null)
+        Branch=${URL/$Root}
+        Branch=${Branch#/}
+        Branch=${Branch#branches/}
+        Branch=${Branch%%/*}
+        vcs="(SVN:${Branch}:${Rev})"
+    }
+
+    _git || _svn || true
+
+    unset _reset
+    unset _git
+    unset _svn
+    echo -e "$vcs"
+}
+PS1="\[\e[38;5;135m\]\u\[\e[0m\]@\[\e[38;5;166m\]\h\[\e[0m\]:\[\e[38;5;82m\]\w\[\e[0m\] \[\e[36m\]\$(bash_prompt)\[\e[0m\]\n\[\e[1m\]\$\[\e[0m\] "
