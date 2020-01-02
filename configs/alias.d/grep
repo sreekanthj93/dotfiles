@@ -1,8 +1,9 @@
 alias grep='grep --color=auto'
 
-alias gr='grep -nrI --exclude-dir=.svn'
+alias gr='grep -nrI --exclude-dir=".svn" --exclude-dir=".git"'
 alias gri='gr -i'
 
 alias cgr='gr --include="*.h" --include="*.c" --include="*.cpp" --include="*.cc"'
 alias hgr='gr --include="*.h"'
 alias mgr='gr --include="Makefile" --include="makefile" --include="GNUmakefile" --include="*.mk" --include="*.mk.*"'
+alias xgr='gr --include="*.xml"'
