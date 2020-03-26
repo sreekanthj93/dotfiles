@@ -103,6 +103,37 @@
 (save-place-mode 1)
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+;; Lines and Window setting
+(global-hl-line-mode 1)
+;; underline the current line
+;; (set-face-attribute hl-line-face nil :underline t)
+
+;;(set-face-attribute 'mode-line nil
+;;                    :foreground "Black"
+;;                    :background "DarkOrange")
+;;(set-face-attribute 'mode-line-inactive nil
+;;                    :foreground "Black"
+;;                    :background "#eeccff")
+
+(set-face-attribute 'mode-line-inactive nil
+                    :background "#1a1a1a"
+                    :foreground "white")
+
+;; flash current window
+(global-set-key (kbd "<f12>") 'flash-active-buffer)
+(make-face 'flash-active-buffer-face)
+(set-face-attribute 'flash-active-buffer-face nil
+                    :background "#9933ff" :foreground nil)
+
+(defun flash-active-buffer ()
+  (interactive)
+  (run-at-time "100 millisec" nil
+               (lambda (remap-cookie)
+                 (face-remap-remove-relative remap-cookie))
+               (face-remap-add-relative 'default 'flash-active-buffer-face)))
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 ;; Flycheck
 (use-package flycheck
   :ensure t
