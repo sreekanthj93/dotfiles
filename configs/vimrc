@@ -112,6 +112,7 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'editorconfig/editorconfig-vim'
 
 call plug#end()
 " Plugins - end
