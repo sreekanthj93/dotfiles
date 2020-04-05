@@ -23,3 +23,7 @@ fi
 
 unsetopt share_history
 setopt histignoredups
+
+autoload -Uz promptinit
+promptinit
+prompt sorin
