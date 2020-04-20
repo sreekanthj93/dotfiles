@@ -1,12 +1,12 @@
 # dotfiles
-dotfiles skeletons to make life on *NIX saner :)
+dotfiles skeletons to make my life on *NIX saner :)
 
 Usage
 -----
 Usage is simple
   ```console
-    $ git clone --depth 1 -j $(nproc) --no-tags https://github.com/sreekanthj93/dotfiles.git "$HOME/dotfiles"
-    $ $HOME/dotfiles/linkall
+    $ git clone --depth 1 -j $(nproc) --no-tags https://github.com/sreekanthj93/dotfiles.git "$HOME/.dotfiles"
+    $ $HOME/.dotfiles/install.sh
   ```
 
 Finally to get aliases add below lines in .bashrc or .zshrc

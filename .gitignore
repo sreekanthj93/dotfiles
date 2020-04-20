@@ -1,9 +1,14 @@
+# \#*#
+~
 # Emacs ones
-\#*#
-configs/emacs.d/*
+emacs.d.symlink/*
 *.elc
 # But don't ignore these specific locations.
-!configs/emacs.d/lisp
-!configs/emacs.d/site-lisp
-!configs/emacs.d/init.el
-!configs/emacs.d/.dir-locals.el
+!emacs.d.symlink/lisp
+!emacs.d.symlink/site-lisp
+!emacs.d.symlink/init.el
+!emacs.d.symlink/.dir-locals.el
+
+# nvim ignores
+config/nvim.symlink/plugged
+config/nvim.symlink/autoload/plug.vim
