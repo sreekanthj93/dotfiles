@@ -29,7 +29,7 @@
 " }}
 
 " Environ vars {{
-  let $NVIM_COC_LOG_FILE=s:vim_tmp_dir.'coc.log'
+  let $NVIM_COC_LOG_FILE='/tmp/coc.log'
   let $NVIM_COC_LOG_LEVEL='off'
 " }}
 
@@ -395,4 +395,3 @@
     au Filetype BluePrint setlocal ts=4 sw=4 sts=0 expandtab
   augroup END
 " }}
-
