@@ -1,0 +1,18 @@
+{
+  // General
+  "suggest.timeout" : 2000,
+  "suggest.minTriggerInputLength" : 3,
+
+  // coc-highlight
+  "coc.preferences.colorSupport": true,
+
+  // coc-pairs
+  "pairs.enableCharacters": [
+    "(",
+    "[",
+    "{",
+    "'",
+    "\"",
+    "`"
+  ],
+}

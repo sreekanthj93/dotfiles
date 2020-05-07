@@ -291,17 +291,43 @@
   " }}
 
   " CoC {{
+    " CoC Extentions
+    let g:coc_global_extensions = [
+      \ 'coc-tsserver',
+      \ 'coc-html',
+      \ 'coc-css',
+      \ 'coc-json',
+      \ 'coc-eslint',
+      \ 'coc-tslint-plugin',
+      \ 'coc-prettier',
+      \ 'coc-highlight',
+      \ 'coc-angular',
+      \ 'coc-yank',
+      \ 'coc-pairs',
+      \ 'coc-java',
+      \ 'coc-flutter',
+      \ 'coc-git',
+      \ 'coc-lists',
+      \ 'coc-diagnostic',
+      \ 'coc-actions',
+    \ ]
     " GoTo code navigation.
     nmap <silent> gd <Plug>(coc-definition)
     nmap <silent> gy <Plug>(coc-type-definition)
     nmap <silent> gi <Plug>(coc-implementation)
     nmap <silent> gr <Plug>(coc-references)
     nmap <silent> gh <Plug>(coc-dohover)
+
     " Formatting selected code.
     xmap <leader>f  <Plug>(coc-format-selected)
     nmap <leader>f  <Plug>(coc-format-selected)
+
     " Symbol renaming.
     nmap <leader>rn <Plug>(coc-rename)
+
+    " Highlight the symbol and its references when holding the cursor.
+    nmap <silent> <leader>ch :call CocActionAsync('highlight')<CR>
+
     " Use <tab> for trigger completion and navigate to the next complete item
     function! s:check_back_space() abort
       let col = col('.') - 1
@@ -315,11 +341,10 @@
 
     " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
     " position. Coc only does snippet and additional edit on confirm.
-    if exists('*complete_info')
-      inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-    else
-      imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-    endif
+    " inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+      \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
   " }}
 
   " NerdTree {{
