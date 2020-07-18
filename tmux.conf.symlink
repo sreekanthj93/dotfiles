@@ -4,7 +4,7 @@
 ##############################
 
 # tmux display things in 256 colors
-set -g default-terminal "tmux-256color"
+set -g default-terminal "xterm-256color"
 set-window-option -g xterm-keys on
 set -g update-environment -r
 
@@ -12,14 +12,6 @@ set -g history-limit 20000
 
 # automatically renumber tmux windows
 set -g renumber-windows on
-
-# remap prefix to Ctrl+a
-unbind C-b
-set -g prefix C-a
-bind C-a send-prefix
-
-# for nested tmux sessions
-bind-key a send-prefix
 
 # Activity Monitoring
 setw -g monitor-activity off
@@ -45,6 +37,17 @@ set-option -g set-titles-string "#T - #W"
 ##############################
 ######## Key Bindings ########
 ##############################
+
+# remap prefix to Ctrl+a
+unbind C-b
+set -g prefix C-a
+bind C-a send-prefix
+
+# for nested tmux sessions
+bind-key a send-prefix
+
+# Choose Session
+bind C-s choose-session
 
 # Splits
 bind | split-window -h -c "#{pane_current_path}"
