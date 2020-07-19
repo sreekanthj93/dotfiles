@@ -28,7 +28,7 @@ sourceall() {
 # $2 target
 create_symlink_old() {
   local file=$1 target=$2
-  
+
   if [ -e "$target" ]; then
     warn "  ${Y}Skipping${NC} exisiting symlink ~${target#$HOME}"
     return 0
@@ -101,6 +101,6 @@ checktool() {
 installclitools() {
   for t in ${CLiToolList[@]}; do
     # CLiInstallCmd
-    # echo $t
+    echo $t
   done
 }

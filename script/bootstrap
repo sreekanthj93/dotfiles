@@ -2,9 +2,6 @@
 #
 # bootstrap installs things.
 
-echo Hi $@
-exit 0
-
 cd "$(dirname "$0")/.."
 DOTFILES_ROOT=$(pwd -P)
 
