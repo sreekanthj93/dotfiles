@@ -12,3 +12,10 @@ emacs.d.symlink/*
 # nvim ignores
 config/nvim.symlink/plugged
 config/nvim.symlink/autoload/plug.vim
+config/nvim.symlink/sessions
+
+# fish ignores
+config/fish.symlink/*
+ # keep below fish stuff
+!config/fish.symlink/config.fish
+!config/fish.symlink/functions

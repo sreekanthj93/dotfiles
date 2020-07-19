@@ -1,0 +1,9 @@
+
+getbrew() {
+  if ! checktool brew; then
+    warn "Installing HomeBrew.."
+    # bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  else
+    success "HomeBrew already installed"
+  fi
+}

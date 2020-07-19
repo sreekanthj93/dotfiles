@@ -1,0 +1,13 @@
+
+# Get HomeBrew if not present
+getbrew
+
+
+if test ! $(xcode-select -p); then
+  warn "Installing Xcode Command Line Tools.. be patient.."
+  xcode-select --install
+fi
+success "XCode Command Line Tools successfully installed"
+
+CLiInstallCmd=brew
+CLiToolList=()

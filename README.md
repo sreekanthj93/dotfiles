@@ -6,7 +6,7 @@ Usage
 Usage is simple
   ```console
     $ git clone --depth 1 -j $(nproc) --no-tags https://github.com/sreekanthj93/dotfiles.git "$HOME/.dotfiles"
-    $ $HOME/.dotfiles/install.sh
+    $ $HOME/.dotfiles/script/bootstrap
   ```
 
 Finally to get aliases add below lines in .bashrc or .zshrc

@@ -1,0 +1,106 @@
+
+info() {
+  printf "  [ ${B}..${NC} ] $1\n"
+}
+
+warn() {
+  printf "  [ ${Y}??${NC} ] $1\n"
+}
+
+success() {
+  printf "  [ ${G}OK${NC} ] $1\n"
+}
+
+fail() {
+  printf "  [${R}FAIL${NC}] $1\n"
+  echo ''
+  exit 1
+}
+
+# $1 pass a directory
+sourceall() {
+  for file in $1/*; do
+    source $file
+  done
+}
+
+# $1 file
+# $2 target
+create_symlink_old() {
+  local file=$1 target=$2
+  
+  if [ -e "$target" ]; then
+    warn "  ${Y}Skipping${NC} exisiting symlink ~${target#$HOME}"
+    return 0
+  elif [ -L $target -a ! -e $target ]; then
+    warn "  ${R}Deleting${NC} broken symlink ~${target#$HOME}"
+    rm -f $target
+  fi
+  info "  ${G}Creating${NC} symlink ~${target#$HOME}"
+  # ln -s $file $target
+}
+create_symlink() {
+  local file=$1 target=$2
+  local remove= backup= skip= action=
+
+  if [ -f "$target" -o -d "$target" -o -L "$target" ]; then
+    if [ "$backup_all" != "true" -a "$remove_all" != "true" -a "$skip_all" != "true" ]; then
+      local cur_target=$(readlink $target)
+      if [ "$cur_target" = "$target" ]; then
+        skip=true
+      else
+        warn "~${target#$HOME} already exists, what do you want to do?\n
+        [s]kip, [S]kip all, [r]emove, [R]emove all, [b]ackup, [B]ackup all?"
+        read -n 1 action
+
+        case "$action" in
+          b) backup=true;;
+          B) backup_all=true;;
+          r) remove=true;;
+          R) remove_all=true;;
+          s) skip=true;;
+          S) skip_all=true;;
+          *) ;;
+        esac
+      fi
+    fi
+
+    backup=${backup:-$backup_all}
+    remove=${remove:-$remove_all}
+    skip=${skip:-$skip_all}
+
+    if [ "$backup" = "true" ]; then
+      mv "$target" "${target}.backup"
+      success "Moved $target to ${target}.backup"
+    fi
+
+    if [ "$remove" = "true" ]; then
+      rm -rf "$target"
+      success "Removed $dst"
+    fi
+
+    if [ "$skip" = "true" ]; then
+      success "Skipping $file"
+    fi
+  fi
+
+  if [ "$skip" != "true" ]; then
+    info "  ${G}Creating${NC} symlink ~${target#$HOME}"
+    ln -s $file $target
+  fi
+}
+
+checktool() {
+  if test ! $(which $1); then
+    return 1
+  else
+    return 0
+  fi
+}
+
+installclitools() {
+  for t in ${CLiToolList[@]}; do
+    # CLiInstallCmd
+    # echo $t
+  done
+}

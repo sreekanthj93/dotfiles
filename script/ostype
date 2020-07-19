@@ -1,0 +1,17 @@
+
+# Detect OS
+case "$(uname -s)" in
+  Darwin)
+    OS="Mac OS X"
+    sourceall $DOTFILES_ROOT/script/mac
+    ;;
+  Linux)
+    OS="Linux"
+    ;;
+  CYGWIN*|MINGW32*|MSYS*|MINGW*)
+    OS="Windows"
+    ;;
+  *)
+    fail "Unsupported OS.. Exiting.."
+    ;;
+esac

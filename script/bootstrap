@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+#
+# bootstrap installs things.
+
+echo Hi $@
+exit 0
+
+cd "$(dirname "$0")/.."
+DOTFILES_ROOT=$(pwd -P)
+
+set -e
+echo ''
+
+# Source all utils
+for file in $DOTFILES_ROOT/script/utils/*; do source $file; done
+
+# Detect OS and install needed tools for that OS
+source $DOTFILES_ROOT/script/ostype
+
+# Install dotfiles
+source $DOTFILES_ROOT/script/install
+success "Done.. Reload your shell..."
+
+echo ''
+echo "All installed!"
