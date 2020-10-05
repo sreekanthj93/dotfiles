@@ -159,6 +159,7 @@
 
   " Whitespace settings {{
     " set noexpandtab                " Do not expand tabs
+    set expandtab                  " Expand tabs
     set smarttab                   " Smart tabs
     " set tabstop=4                  " global tabstop 4spaces will be changed based on filetype below
     " set shiftwidth=4

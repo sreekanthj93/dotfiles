@@ -1,0 +1,77 @@
+#
+# This is the config file, and
+# a '#' or ';' character indicates
+# a comment
+#
+
+[core]
+  editor  = vim
+
+[alias]
+  # Basic
+  co      = checkout
+  ci      = commit
+  cl      = clone
+  st      = status
+  m       = merge
+  p       = pull
+  ph      = push
+  cp      = cherry-pick
+  ai      = add --interactive
+  # Branch
+  b       = branch
+  ba      = branch -a
+  bt      = branch --track
+  bm      = branch -m
+  bd      = branch -d
+  bD      = branch -D
+  bu      = branch -u
+  bv      = branch -v
+  bvv     = branch -vv
+  # Commit
+  c       = commit
+  cv      = commit -v
+  ca      = commit -a
+  cva     = commit -v -a
+  cm      = commit -m
+  cvm     = commit -v -m
+  cam     = commit -am
+  cvam    = commit -v -am
+  ci      = commit --interactive
+  caa     = commit -a --amend -C HEAD
+  # Diff
+  d       = diff
+  dw      = diff --word-diff
+  ds      = diff --staged
+  dsw     = diff --word-diff --staged
+  dc      = diff --cached
+  dcw     = diff --word-diff --cached
+  # Log
+  l       = log
+  ls      = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%an]" --decorate --date=relative
+  ll      = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [a:%an,c:%cn]" --decorate --numstat
+  lc      = "!f() { git ll "$1"^.."$1"; }; f"
+  lnc     = log --pretty=format:"%h\\ %s\\ [%cn]"
+  fl      = log -u
+  filelog = log -u
+  # Search
+  gr      = grep -I
+  gri     = grep -Ii
+  # submodule
+  sub     = submodule
+  subst   = submodule status
+  # unstage
+  unstage = restore --staged
+  # Reset
+  rst     = reset
+  rst1    = reset HEAD^
+  rst1    = reset HEAD^
+  rsth    = reset --hard
+  rsth1   = reset --hard HEAD^
+  rsth2   = reset --hard HEAD^^
+  # Remote
+  r       = remote
+  rv      = remote -v
+  ra      = remote add
+  raf     = remote add -f
+

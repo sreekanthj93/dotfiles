@@ -1,0 +1,8 @@
+GTAGS
+GRTAGS
+GPATH
+*.srctrlbm
+*.srctrldb
+*.srctrlprj
+.vs
+.vscode
