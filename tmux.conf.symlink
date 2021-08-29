@@ -59,6 +59,9 @@ bind-key r source-file ~/.tmux.conf \; display-message "Config reloaded..."
 # Clear tmux buffer
 bind -n C-k clear-history \; display-message "Cleared History..."
 
+# Copy to system buffer
+bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'xclip -in -selection clipboard'
+
 # synchronize all panes in a window
 bind y setw synchronize-panes
 
