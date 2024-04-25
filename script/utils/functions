@@ -11,7 +11,12 @@ success() {
   printf "  [ ${G}OK${NC} ] $1\n"
 }
 
-fail() {
+error() {
+  printf "  [${R}ERR${NC}] $1\n"
+  echo ''
+}
+
+fatal() {
   printf "  [${R}FAIL${NC}] $1\n"
   echo ''
   exit 1
@@ -26,19 +31,6 @@ sourceall() {
 
 # $1 file
 # $2 target
-create_symlink_old() {
-  local file=$1 target=$2
-
-  if [ -e "$target" ]; then
-    warn "  ${Y}Skipping${NC} exisiting symlink ~${target#$HOME}"
-    return 0
-  elif [ -L $target -a ! -e $target ]; then
-    warn "  ${R}Deleting${NC} broken symlink ~${target#$HOME}"
-    rm -f $target
-  fi
-  info "  ${G}Creating${NC} symlink ~${target#$HOME}"
-  # ln -s $file $target
-}
 create_symlink() {
   local file=$1 target=$2
   local remove= backup= skip= action=
@@ -99,8 +91,31 @@ checktool() {
 }
 
 installclitools() {
-  for t in ${CLiToolList[@]}; do
-    # CLiInstallCmd
-    echo $t
+  for pkg in ${Packages[@]}; do
+    # $PackageManager install $pkg
+    echo $pkg
   done
+}
+
+doGitCheckouts() {
+  # echo git clone $repo $path
+  IFS=' '
+  for elem in "${GitRepositories[@]}"; do
+    read -a tokens <<< "$elem"  # uses default whitespace IFS
+    local repo=${tokens[0]} path=${tokens[1]}
+    # remove ~ and replace with $HOME
+    local abs_path=${path/"~"/$HOME}
+    # info "  Checking out $repo at $path ($abs_path)"
+    if [ -d $abs_path ]; then
+      warn "  $path already exists"
+    else
+      git clone -q $repo $abs_path
+      if [ $? -eq 0 ]; then
+        success "  Checked out $repo at $path"
+      else
+        error "  Failed to checkout $repo at $path"
+      fi
+    fi
+  done
+  unset IFS
 }

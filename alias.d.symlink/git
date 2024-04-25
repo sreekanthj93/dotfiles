@@ -12,6 +12,7 @@ alias gap='git add -p'
 alias gall='git add -A'
 
 alias gm="git merge"
+alias gmd="git merge --no-commit --no-ff"
 alias gmv='git mv'
 
 # Fetch

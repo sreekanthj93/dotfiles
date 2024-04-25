@@ -6,6 +6,9 @@ fi
 info "Installing required command line tools"
 installclitools
 
+info "Checking out Repositories"
+doGitCheckouts
+
 info "Creating dotfile symlinks"
 linkables=$(find -H "$DOTFILES_ROOT" -maxdepth 3 -name '*.symlink')
 linkables=${linkables//$DOTFILES_ROOT\//}
@@ -14,8 +17,8 @@ for file in $linkables ; do
   create_symlink $DOTFILES_ROOT/$file $target
 done
 
-info "Creating vim symlinks and required directories"
-create_symlink $DOTFILES_ROOT/config/nvim.symlink $HOME/.vim
-create_symlink $DOTFILES_ROOT/config/nvim.symlink/init.vim $HOME/.vimrc
-mkdir -p $HOME/.vim-tmp/backup $HOME/.vim-tmp/swap $HOME/.vim-tmp/undo
-mkdir -p $HOME/.nvim-tmp/backup $HOME/.nvim-tmp/swap $HOME/.nvim-tmp/undo
+# info "Creating vim symlinks and required directories"
+# create_symlink $DOTFILES_ROOT/config/nvim.symlink $HOME/.vim
+# create_symlink $DOTFILES_ROOT/config/nvim.symlink/init.vim $HOME/.vimrc
+# mkdir -p $HOME/.vim-tmp/backup $HOME/.vim-tmp/swap $HOME/.vim-tmp/undo
+# mkdir -p $HOME/.nvim-tmp/backup $HOME/.nvim-tmp/swap $HOME/.nvim-tmp/undo

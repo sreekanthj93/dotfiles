@@ -1,0 +1,4 @@
+GitRepositories=(
+  "https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm" # tmux package manager
+  "https://github.com/agkozak/zcomet.git ~/.zcomet/bin" # zcomet
+)

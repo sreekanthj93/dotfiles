@@ -12,6 +12,6 @@ case "$(uname -s)" in
     OS="Windows"
     ;;
   *)
-    fail "Unsupported OS.. Exiting.."
+    fatal "Unsupported OS.. Exiting.."
     ;;
 esac
