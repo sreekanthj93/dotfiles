@@ -25,3 +25,5 @@ end
 if test -d "$HOME/.local/usr/bin"
   set PATH $HOME/.local/usr/bin $PATH
 end
+
+starship init fish | source

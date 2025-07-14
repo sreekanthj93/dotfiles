@@ -23,6 +23,10 @@ fi
 bind 'set show-all-if-ambiguous on'
 bind 'TAB:menu-complete'
 
+eval "$(starship init bash)"
+
+return 0
+
 call_count=1
 bash_prompt() {
 #    local ps1="\[\e[38;5;135m\]\u\[\e[0m\] at \[\e[38;5;166m\]\h\[\e[0m\] in \[\e[38;5;82m\]\w\[\e[0m\]"

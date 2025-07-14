@@ -6,9 +6,6 @@ fi
 info "Installing required command line tools"
 installclitools
 
-info "Checking out Repositories"
-doGitCheckouts
-
 info "Creating dotfile symlinks"
 linkables=$(find -H "$DOTFILES_ROOT" -maxdepth 3 -name '*.symlink')
 linkables=${linkables//$DOTFILES_ROOT\//}
@@ -16,6 +13,9 @@ for file in $linkables ; do
   target=$HOME/.${file%.symlink}
   create_symlink $DOTFILES_ROOT/$file $target
 done
+
+info "Checking out Repositories"
+doGitCheckouts
 
 # info "Creating vim symlinks and required directories"
 # create_symlink $DOTFILES_ROOT/config/nvim.symlink $HOME/.vim

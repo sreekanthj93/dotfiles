@@ -13,6 +13,7 @@ emacs.d.symlink/*
 config/nvim.symlink/plugged
 config/nvim.symlink/autoload/plug.vim
 config/nvim.symlink/sessions
+config/nvim.symlink/lazy-lock.json
 
 # tmux
 config/tmux.symlink/plugins

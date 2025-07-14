@@ -19,32 +19,23 @@ return {
   {
     -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
+    version = 'v3.x',
+    main = 'ibl',
     event = { 'BufReadPost', 'BufNewFile' },
-    opts = {
-      char = '┊',
-      filetype_exclude = {
-        'alpha',
-        'dashboard',
-        'help',
-        'lazy',
-        'lazy',
-        'lazyterm',
-        'lspinfo',
-        'mason',
-        'neo-tree',
-        'notify',
-        'nvim-tree',
-        'TelescopePrompt',
-        'TelescopeResults',
-        'terminal',
-        'toggleterm',
-        'Trouble',
-      },
-      buftype_exclude = { 'terminal' },
-      show_current_context = true,
-      show_current_context_start = true,
-      show_trailing_blankline_indent = true,
-    },
+    opts = {},
+    config = function()
+      require('ibl').setup({
+        indent = {
+          -- highlight = highlight,
+          -- char = '┊'
+        },
+        whitespace = {
+            -- highlight = highlight,
+            remove_blankline_trail = false,
+        },
+        scope = { enabled = true },
+      })
+    end
   },
 
   -- better vim.ui
